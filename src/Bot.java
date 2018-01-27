@@ -15,10 +15,12 @@ public class Bot extends TelegramLongPollingBot {
     ArrayList<String> funnyStickerArr = new ArrayList<String>();
     ArrayList<User> userArr = new ArrayList<User>();
 
+
     public Bot() {
         initialiseStickerArr();
+
     }
-    
+
     @Override
     public void onUpdateReceived(Update update){
         System.out.println(update.getMessage().getFrom().getFirstName()+ " " + update.getMessage().getText());
@@ -99,8 +101,12 @@ public class Bot extends TelegramLongPollingBot {
         }
         if (userArr.size() != 0) {
             Automated automated = new Automated();
-            automated.checkTime(userArr, index);
+            automated.checkTime(userArr);
         }
+    }
+
+    public void checkTime() {
+
     }
 
     @Override
