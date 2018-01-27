@@ -24,6 +24,7 @@ public class UserInput extends Bot{
         long chat_id = update.getMessage().getChatId();
         ArrayList<SendMessage> replyList = new ArrayList<SendMessage>();
 
+
         if (update.hasMessage() && update.getMessage().hasText()) {
             String msgtext = update.getMessage().getText().toLowerCase();
 
@@ -31,8 +32,8 @@ public class UserInput extends Bot{
                 sendmessage = new SendMessage().setChatId(chat_id).setText("Hello " + update.getMessage().getFrom().getFirstName() + "\n");
                 replyList.add(sendmessage);
             }
-            else if (msgtext.contains("/") ){
-                String[] strArr = msgtext.split("/");
+            if (msgtext.contains(" or ") ){
+                String[] strArr = msgtext.split("or");
                 Random r = new Random();
                 int choice = r.nextInt(strArr.length);
                 sendmessage = new SendMessage().setChatId(chat_id).setText(strArr[choice]+"\n");
@@ -107,7 +108,7 @@ public class UserInput extends Bot{
                 replyList.add(sendmessage);
 
             }
-            if (replyList.isEmpty()) {
+            else if (replyList.isEmpty()) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");
                 replyList.add(sendmessage);
 

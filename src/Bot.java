@@ -14,7 +14,7 @@ public class Bot extends TelegramLongPollingBot {
     ArrayList<String> loveStickerArr = new ArrayList<String>();
     ArrayList<String> funnyStickerArr = new ArrayList<String>();
     static ArrayList<User> userArr = new ArrayList<User>();
-
+    public static boolean start = false;
 
     public Bot() {
         initialiseStickerArr();
@@ -99,7 +99,8 @@ public class Bot extends TelegramLongPollingBot {
                 index = userArr.size()-1;
             }
         }
-        if (userArr.size() != 0) {
+        if (userArr.size() != 0 && !start) {
+            start = true;
             Automated automated = new Automated();
             automated.checkTime(userArr);
         }

@@ -1,3 +1,5 @@
+import org.telegram.telegrambots.api.methods.send.SendMessage;
+
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStream;
@@ -30,7 +32,7 @@ public class weather {
                     readStream(con.getErrorStream());
         }
 
-        return str;
+        return parseGetReq(str);
     }
     // Read the responded result
     private String readStream(InputStream inputStream) throws Exception {
@@ -43,6 +45,20 @@ public class weather {
         }
         reader.close();
         return response.toString();
+    }
+
+    private String parseGetReq(String str) {
+        String s = str.substring(str.indexOf("<forecast>"));
+        char ch = '>';
+        int index = 9;
+
+        while (ch != '<'){
+            index++;
+            ch = s.charAt(index);
+        }
+
+        s = s.substring(10, index);
+        return s;
     }
 }
 

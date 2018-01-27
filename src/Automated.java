@@ -29,7 +29,7 @@ public class Automated extends Bot{
                 }
             }
         };
-        timer.schedule(task, 0, 1800000);
+        timer.schedule(task, 0, 900000);
     }
 
     public void sendStickerTimer(ArrayList<User> userArr) {
@@ -37,9 +37,9 @@ public class Automated extends Bot{
             SendSticker sendsticker = new SendSticker();
             sendsticker.setChatId(userArr.get(i).getChatId());
             Random r = new Random();
-            int choice = r.nextInt(sadStickerArr.size());
+            int choice = r.nextInt(loveStickerArr.size());
 
-            sendsticker.setSticker(sadStickerArr.get(choice));
+            sendsticker.setSticker(loveStickerArr.get(choice));
             try {
                 sendSticker(sendsticker);
             } catch (TelegramApiException e) {
