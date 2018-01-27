@@ -13,6 +13,7 @@ public class Bot extends TelegramLongPollingBot {
     ArrayList<String> sadStickerArr = new ArrayList<String>();
     ArrayList<String> loveStickerArr = new ArrayList<String>();
     ArrayList<String> funnyStickerArr = new ArrayList<String>();
+    ArrayList<User> userArr = new ArrayList<User>();
 
     public Bot() {
         initialiseStickerArr();
@@ -21,7 +22,7 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update){ 
         System.out.println(update.getMessage().getFrom().getFirstName()+ " " + update.getMessage().getText());
-        
+
         SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId()); 
         sendMessage.setText("Hello" + update.getMessage().getFrom().getFirstName() + " \n" + update.getMessage().getText());
 
@@ -86,7 +87,30 @@ public class Bot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
         }
+        User user = new User(update.getMessage().getChatId());
+        int index = 0;
+        if (userArr.size() == 0)
+            userArr.add(user);
+        else {
+            boolean userExists = false;
+            for (int i=0; i<userArr.size(); i++) {
+                if (update.getMessage().getChatId() == userArr.get(i).getChatId()) {
+                    userExists = true;
+                    index = i;
+                    break;
+                }
+            }
+            if (!userExists) {
+                userArr.add(user);
+                index = userArr.size()-1;
+            }
+        }
+        if (userArr.size() != 0) {
+            Automated automated = new Automated();
+            automated.checkTime(userArr, index);
+        }
     }
+
     @Override
     public String getBotToken() {
         return "402898203:AAHSlk20D6VXpg75YD0T_4ZqBhPn7uYFXGQ";
