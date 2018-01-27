@@ -15,6 +15,9 @@ public class Bot extends TelegramLongPollingBot {
     ArrayList<String> funnyStickerArr = new ArrayList<String>();
     static ArrayList<User> userArr = new ArrayList<User>();
     public static boolean start = false;
+    public boolean playingGame = false;
+
+    public static Game game;
 
     public Bot() {
         initialiseStickerArr();
@@ -45,6 +48,18 @@ public class Bot extends TelegramLongPollingBot {
                 index = userArr.size()-1;
             }
         }
+        if (update.getMessage().hasText() && update.getMessage().getText().equals("/play")) {
+            game = new Game();
+            game.play(index);
+            playingGame = true;
+            return;
+        }
+        else if (playingGame) {
+            if (!game.finishGame)
+                game.guess(Integer.valueOf(update.getMessage().getText()));
+            else
+                playingGame = false;
+        }
 
         ArrayList<SendMessage> sendMessageArrayList = new ArrayList<SendMessage>();
         sendMessageArrayList = userinput.handleUserInput(update);
@@ -55,7 +70,7 @@ public class Bot extends TelegramLongPollingBot {
                 System.out.println("hey "+ userArr.get(i).getChatId());
         }
 
-        while (!sendMessageArrayList.isEmpty() && currIndex<sendMessageArrayList.size() && !userArr.get(currIndex).getStopped()) {
+        while (!playingGame && !sendMessageArrayList.isEmpty() && currIndex<sendMessageArrayList.size() && !userArr.get(currIndex).getStopped()) {
 
             SendMessage sendMessage = sendMessageArrayList.get(currIndex);
 
