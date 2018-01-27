@@ -25,13 +25,37 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update){
         System.out.println(update.getMessage().getFrom().getFirstName()+ " " + update.getMessage().getText());
 
+        User user = new User(update.getMessage().getChatId());
+        int index = 0;
+
         UserInput userinput = new UserInput();
+        if (userArr.size() == 0)
+            userArr.add(user);
+        else {
+            boolean userExists = false;
+            for (int i=0; i<userArr.size(); i++) {
+                if (update.getMessage().getChatId() == userArr.get(i).getChatId()) {
+                    userExists = true;
+                    index = i;
+                    break;
+                }
+            }
+            if (!userExists) {
+                userArr.add(user);
+                index = userArr.size()-1;
+            }
+        }
+
         ArrayList<SendMessage> sendMessageArrayList = new ArrayList<SendMessage>();
         sendMessageArrayList = userinput.handleUserInput(update);
 
         int currIndex = 0;
+        for (int i=0; i<userArr.size(); i++) {
+            if (userArr.get(i).getStopped())
+                System.out.println("hey "+ userArr.get(i).getChatId());
+        }
 
-        while (!sendMessageArrayList.isEmpty() && currIndex<sendMessageArrayList.size()) {
+        while (!sendMessageArrayList.isEmpty() && currIndex<sendMessageArrayList.size() && !userArr.get(currIndex).getStopped()) {
 
             SendMessage sendMessage = sendMessageArrayList.get(currIndex);
 
@@ -81,24 +105,7 @@ public class Bot extends TelegramLongPollingBot {
             currIndex++;
         }
 
-        User user = new User(update.getMessage().getChatId());
-        int index = 0;
-        if (userArr.size() == 0)
-            userArr.add(user);
-        else {
-            boolean userExists = false;
-            for (int i=0; i<userArr.size(); i++) {
-                if (update.getMessage().getChatId() == userArr.get(i).getChatId()) {
-                    userExists = true;
-                    index = i;
-                    break;
-                }
-            }
-            if (!userExists) {
-                userArr.add(user);
-                index = userArr.size()-1;
-            }
-        }
+
         if (userArr.size() != 0 && !start) {
             start = true;
             Automated automated = new Automated();
