@@ -96,7 +96,7 @@ public class UserInput extends Bot{
 
             }
             if (replyList.isEmpty()) {
-                sendmessage = new SendMessage().setChatId(chat_id).setText("what lol " + msgtext + "\n");
+                sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");
                 replyList.add(sendmessage);
 
             }
