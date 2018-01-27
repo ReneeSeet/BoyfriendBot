@@ -108,6 +108,13 @@ public class UserInput extends Bot{
                 replyList.add(sendmessage);
 
             }
+
+            if (msgtext.equals("9gag")) {
+                String s = new ImageGetter().readURL();
+                sendmessage = new SendMessage().setChatId(chat_id).setText("test\n");
+                replyList.add(sendmessage);
+            }
+            
             else if (replyList.isEmpty()) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");
                 replyList.add(sendmessage);
