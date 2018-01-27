@@ -28,7 +28,7 @@ public class UserInput extends Bot{
             String msgtext = update.getMessage().getText().toLowerCase();
 
             if (msgtext.equals("/start")) {
-                sendmessage = new SendMessage().setChatId(chat_id).setText("Hello " + update.getMessage().getFrom().getFirstName() + " darling\n");
+                sendmessage = new SendMessage().setChatId(chat_id).setText("Hello " + update.getMessage().getFrom().getFirstName() + "\n");
                 replyList.add(sendmessage);
             }
             else if (msgtext.contains("/") ){
@@ -100,6 +100,10 @@ public class UserInput extends Bot{
                 replyList.add(sendmessage);
 
             }
+        }
+        else {
+            sendmessage = new SendMessage().setChatId(chat_id).setText("sendFunnySticker");
+            replyList.add(sendmessage);
         }
 
         return replyList;
