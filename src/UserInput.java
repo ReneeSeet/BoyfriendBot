@@ -95,6 +95,18 @@ public class UserInput extends Bot{
                 replyList.add(sendmessage);
 
             }
+            if (msgtext.equals("weather")){
+                weather something = new weather();
+                String status = "";
+                try{
+                    status = something.callWebAPI("24hrs_forecast","781CF461BB6606ADA12D573149525F69F9E98B66D1269B12");
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+                sendmessage = new SendMessage().setChatId(chat_id).setText(status);
+                replyList.add(sendmessage);
+
+            }
             if (replyList.isEmpty()) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");
                 replyList.add(sendmessage);
