@@ -41,7 +41,7 @@ public class UserInput extends Bot{
                 int choice = r.nextInt(strArr.length) + 1;
                 sendmessage = new SendMessage().setChatId(chat_id).setText(strArr[choice]+"\n");
             }
-            else if (msgtext.contains("sad")) {
+            else if (msgtext.contains("sad")||msgtext.contains("stress")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("sendSadSticker");
             }
             else if (msgtext.contains("love you")) {

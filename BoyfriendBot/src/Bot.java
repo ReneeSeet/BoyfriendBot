@@ -28,49 +28,60 @@ public class Bot extends TelegramLongPollingBot {
         UserInput userinput = new UserInput();
         sendMessage = userinput.handleUserInput(update);
 
+        if (sendMessage!=null) {
+            if (sendMessage.getText().equals("sendSadSticker")) {
+                SendSticker sendsticker = new SendSticker();
+                sendsticker.setChatId(update.getMessage().getChatId());
+                Random r = new Random();
+                int choice = r.nextInt(sadStickerArr.size() + 1);
 
-        if (sendMessage.getText().equals("sendSadSticker")) {
-            SendSticker sendsticker = new SendSticker();
-            sendsticker.setChatId(update.getMessage().getChatId());
-            Random r = new Random();
-            int choice = r.nextInt(sadStickerArr.size()+1);
+                sendsticker.setSticker(sadStickerArr.get(choice));
+                try {
+                    sendSticker(sendsticker);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            } else if (sendMessage.getText().equals("sendLoveSticker")) {
+                SendSticker sendsticker = new SendSticker();
+                sendsticker.setChatId(update.getMessage().getChatId());
+                Random r = new Random();
+                int choice = r.nextInt(loveStickerArr.size() + 1);
 
-            sendsticker.setSticker(sadStickerArr.get(choice));
-            try {
-                sendSticker(sendsticker);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
+                sendsticker.setSticker(loveStickerArr.get(choice));
+                try {
+                    sendSticker(sendsticker);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            } else if (sendMessage.getText().equals("sendFunnySticker")) {
+                SendSticker sendsticker = new SendSticker();
+                sendsticker.setChatId(update.getMessage().getChatId());
+                Random r = new Random();
+                int choice = r.nextInt(funnyStickerArr.size() + 1);
+
+                sendsticker.setSticker(funnyStickerArr.get(choice));
+                try {
+                    sendSticker(sendsticker);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    sendMessage(sendMessage);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        else if (sendMessage.getText().equals("sendLoveSticker")) {
+        else {
             SendSticker sendsticker = new SendSticker();
             sendsticker.setChatId(update.getMessage().getChatId());
             Random r = new Random();
-            int choice = r.nextInt(loveStickerArr.size()+1);
-
-            sendsticker.setSticker(loveStickerArr.get(choice));
-            try {
-                sendSticker(sendsticker);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-        else if (sendMessage.getText().equals("sendFunnySticker")) {
-            SendSticker sendsticker = new SendSticker();
-            sendsticker.setChatId(update.getMessage().getChatId());
-            Random r = new Random();
-            int choice = r.nextInt(funnyStickerArr.size()+1);
+            int choice = r.nextInt(funnyStickerArr.size() + 1);
 
             sendsticker.setSticker(funnyStickerArr.get(choice));
             try {
                 sendSticker(sendsticker);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-        else {
-            try {
-                sendMessage(sendMessage);
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
