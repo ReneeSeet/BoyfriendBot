@@ -51,7 +51,7 @@ public class UserInput extends Bot{
                 sendmessage = new SendMessage().setChatId(chat_id).setText("sendFunnySticker");
             }
             else {
-                sendmessage = new SendMessage().setChatId("what lol\n");
+                sendmessage = new SendMessage().setChatId(chat_id).setText("what lol\n");
             }
         }
 

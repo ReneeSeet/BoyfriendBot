@@ -33,7 +33,7 @@ public class Bot extends TelegramLongPollingBot {
                 SendSticker sendsticker = new SendSticker();
                 sendsticker.setChatId(update.getMessage().getChatId());
                 Random r = new Random();
-                int choice = r.nextInt(sadStickerArr.size() + 1);
+                int choice = r.nextInt(sadStickerArr.size());
 
                 sendsticker.setSticker(sadStickerArr.get(choice));
                 try {
@@ -45,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
                 SendSticker sendsticker = new SendSticker();
                 sendsticker.setChatId(update.getMessage().getChatId());
                 Random r = new Random();
-                int choice = r.nextInt(loveStickerArr.size() + 1);
+                int choice = r.nextInt(loveStickerArr.size());
 
                 sendsticker.setSticker(loveStickerArr.get(choice));
                 try {
@@ -57,7 +57,7 @@ public class Bot extends TelegramLongPollingBot {
                 SendSticker sendsticker = new SendSticker();
                 sendsticker.setChatId(update.getMessage().getChatId());
                 Random r = new Random();
-                int choice = r.nextInt(funnyStickerArr.size() + 1);
+                int choice = r.nextInt(funnyStickerArr.size());
 
                 sendsticker.setSticker(funnyStickerArr.get(choice));
                 try {
@@ -77,7 +77,7 @@ public class Bot extends TelegramLongPollingBot {
             SendSticker sendsticker = new SendSticker();
             sendsticker.setChatId(update.getMessage().getChatId());
             Random r = new Random();
-            int choice = r.nextInt(funnyStickerArr.size() + 1);
+            int choice = r.nextInt(funnyStickerArr.size());
 
             sendsticker.setSticker(funnyStickerArr.get(choice));
             try {
