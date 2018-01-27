@@ -96,7 +96,7 @@ public class UserInput extends Bot{
                 replyList.add(sendmessage);
 
             }
-            if (msgtext.equals("weather")){
+            if (msgtext.contains("weather")){
                 weather something = new weather();
                 String status = "";
                 try{
@@ -107,6 +107,8 @@ public class UserInput extends Bot{
                 sendmessage = new SendMessage().setChatId(chat_id).setText(status);
                 replyList.add(sendmessage);
 
+                sendmessage = new SendMessage().setChatId(chat_id).setText(something.decoder(status));
+                replyList.add(sendmessage);
             }
             else if (replyList.isEmpty()) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");

@@ -58,7 +58,21 @@ public class weather {
         }
 
         s = s.substring(10, index);
-        return s;
+
+        return "\"" + s + "\"";
+    }
+
+    public String decoder(String str) {
+        String newstr = null;
+        str = str.toLowerCase();
+        if (str.contains("thunder")) {
+            newstr = "The weather looks bad, stay at home la!\n";
+        }
+        else if (str.contains("shower")) {
+            newstr = "Remember to bring an umbrella and a jacket!\n";
+        }
+        return newstr;
+
     }
 }
 
