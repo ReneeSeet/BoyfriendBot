@@ -13,11 +13,15 @@ public class Bot extends TelegramLongPollingBot {
         SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId()); 
         sendMessage.setText("Hello" + update.getMessage().getFrom().getFirstName() + " \n" + update.getMessage().getText());
 
+        UserInput userinput = new UserInput();
+        sendMessage = userinput.handleUserInput(update);
+
         try {
             sendMessage(sendMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+
     }
     @Override
     public String getBotToken() {
