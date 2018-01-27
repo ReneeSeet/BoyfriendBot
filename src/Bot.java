@@ -106,9 +106,6 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    public void checkTime() {
-
-    }
 
     @Override
     public String getBotToken() {
@@ -143,18 +140,20 @@ public class Bot extends TelegramLongPollingBot {
         loveStickerArr.add("CAADBAADSRIAAvEGNAYR8_UUzMHVLQI");
 
         funnyStickerArr.add("CAADAgADTgcAAlwCZQN5kCc_E9kn6wI");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
-//        funnyStickerArr.add("");
+        funnyStickerArr.add("CAADBQADUgADSLFzBD7I9m-w-bGNAg");
+        funnyStickerArr.add("CAADAgADHQcAAlwCZQM-0Qp3K2vK8AI");
+        funnyStickerArr.add("CAADAgADRwcAAlwCZQNtRySfx0ALSQI");
+        funnyStickerArr.add("CAADBQADwQIAAkVfjQJ1j3zMc89mEwI");
+        funnyStickerArr.add("CAADBQADERQAAkVfjQIRHwaSpEYrXAI");
+        funnyStickerArr.add("CAADBQADEAYAAnsVRgmMMLrrm60dAwI");
+        funnyStickerArr.add("CAADBAADQxIAAvEGNAbffGeFP3iKKgI");
+        funnyStickerArr.add("CAADAwADiwEAAmLypQAB93JW-kg6ZK8C");
+        funnyStickerArr.add("CAADAwADfwEAAmLypQABKupgB1jlwIoC");
+        funnyStickerArr.add("CAADBQADxAIAAqMFQQdiVXzEMseclAI");
+        funnyStickerArr.add("CAADBQADFgADKJ12BLbLdvtafXUhAg");
+        funnyStickerArr.add("CAADBQADLwADgIb7AS1WIV1w3QSgAg");
+        funnyStickerArr.add("CAADBQADagADLXDJAk1OHETxRvdrAg");
+        funnyStickerArr.add("CAADBQADdQADSLFzBLeFCJuli-QfAg");
 
     }
     
