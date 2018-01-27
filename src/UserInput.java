@@ -131,8 +131,7 @@ public class UserInput extends Bot{
                 }
 
                 if (msgtext.equals("9gag")) {
-                    String s = new ImageGetter().readURL();
-                    sendmessage = new SendMessage().setChatId(chat_id).setText("test\n");
+                    sendmessage = new SendMessage().setChatId(chat_id).setText("have some fun here https://9gag.com/\n");
                     replyList.add(sendmessage);
                 }
             }
