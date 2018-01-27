@@ -1,35 +1,52 @@
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.api.methods.send.SendSticker;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
 import java.util.*;
 
 public class Automated extends Bot{
     Date currentTime = Calendar.getInstance().getTime();
-    private static int seconds = 0;
+    public static boolean stopTimer = false;
 
-//    public Automated() {
-//        MyTimer();
-//    }
+    public Automated() {
+        MyTimer();
+    }
 
-//    public static void MyTimer() {
-//        Timer timer = new Timer();
-//        TimerTask task;
-//        task = new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (seconds < 2) {
-//                    //System.out.println("helloooo123\n");
-//                    seconds++;
-//                }
-//                else {
-//                    //stop the timer
-//                    cancel();
-//                }
-//            }
-//        };
-//        timer.schedule(task, 0, 1000);
-//    }
+    public void MyTimer() {
+        Timer timer = new Timer();
+        TimerTask task;
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                if (!stopTimer) {
+                    //System.out.println("helloooo123\n");
+                    sendStickerTimer(userArr);
+                }
+                else {
+                    //stop the timer
+                    cancel();
+                }
+            }
+        };
+        timer.schedule(task, 0, 1800000);
+    }
+
+    public void sendStickerTimer(ArrayList<User> userArr) {
+        for (int i=0; i<userArr.size(); i++) {
+            SendSticker sendsticker = new SendSticker();
+            sendsticker.setChatId(userArr.get(i).getChatId());
+            Random r = new Random();
+            int choice = r.nextInt(sadStickerArr.size());
+
+            sendsticker.setSticker(sadStickerArr.get(choice));
+            try {
+                sendSticker(sendsticker);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public void checkTime(ArrayList<User> userArr) {
         int index;

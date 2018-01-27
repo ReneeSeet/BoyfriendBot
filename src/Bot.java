@@ -13,7 +13,7 @@ public class Bot extends TelegramLongPollingBot {
     ArrayList<String> sadStickerArr = new ArrayList<String>();
     ArrayList<String> loveStickerArr = new ArrayList<String>();
     ArrayList<String> funnyStickerArr = new ArrayList<String>();
-    ArrayList<User> userArr = new ArrayList<User>();
+    static ArrayList<User> userArr = new ArrayList<User>();
 
 
     public Bot() {
