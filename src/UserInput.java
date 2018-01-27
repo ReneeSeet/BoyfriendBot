@@ -19,63 +19,90 @@ import static java.lang.Math.toIntExact;
 
 public class UserInput extends Bot{
 
-    public SendMessage handleUserInput(Update update) {
+    public ArrayList<SendMessage> handleUserInput(Update update) {
         SendMessage sendmessage = null;
         long chat_id = update.getMessage().getChatId();
-        
+        ArrayList<SendMessage> replyList = new ArrayList<SendMessage>();
 
         if (update.hasMessage() && update.getMessage().hasText()) {
             String msgtext = update.getMessage().getText().toLowerCase();
 
             if (msgtext.equals("/start")) {
-                sendmessage = new SendMessage().setChatId(chat_id).setText("Hello\n");
+                sendmessage = new SendMessage().setChatId(chat_id).setText("Hello " + update.getMessage().getFrom().getFirstName() + " darling\n");
+                replyList.add(sendmessage);
             }
             else if (msgtext.contains("/") ){
                 String[] strArr = msgtext.split("/");
                 Random r = new Random();
                 int choice = r.nextInt(strArr.length);
                 sendmessage = new SendMessage().setChatId(chat_id).setText(strArr[choice]+"\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("doing")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("Thinking of you ❤️\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("fuck") || msgtext.contains("stress")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("Chill girl (:\n");
+                replyList.add(sendmessage);
+
             }
 
             if (msgtext.contains("break up") || msgtext.contains("give up") || msgtext.contains("quit") || msgtext.contains("bye")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("noooooooooo :(\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.equals("hi")|| msgtext.equals("hi ") || msgtext.contains("hello")||msgtext.equals("yo") || msgtext.contains("hey")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what's up babe?\n");
+                replyList.add(sendmessage);
+
             }
-            if (msgtext.contains("sad")||msgtext.contains("stress")) {
+            if (msgtext.contains("sad")||msgtext.contains("stress")||msgtext.contains("bad")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("sendSadSticker");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("love you")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("sendLoveSticker");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("hate you")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("but I love you ❤️\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("funny") || msgtext.contains("joke")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("sendFunnySticker");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("who are you") || msgtext.contains("your name")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("I'm Zames baby ;)\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("how old are you") || msgtext.contains("your age")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("21\n");
+                replyList.add(sendmessage);
+
             }
             if (msgtext.contains("how are you")) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("great! what about you?\n");
+                replyList.add(sendmessage);
+
             }
-            else {
-                sendmessage = new SendMessage().setChatId(chat_id).setText("what lol\n");
+            if (replyList.isEmpty()) {
+                sendmessage = new SendMessage().setChatId(chat_id).setText("what lol " + msgtext + "\n");
+                replyList.add(sendmessage);
+
             }
         }
 
-        return sendmessage;
+        return replyList;
     }
 
 }

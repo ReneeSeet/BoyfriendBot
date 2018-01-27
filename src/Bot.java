@@ -20,16 +20,19 @@ public class Bot extends TelegramLongPollingBot {
     }
     
     @Override
-    public void onUpdateReceived(Update update){ 
+    public void onUpdateReceived(Update update){
         System.out.println(update.getMessage().getFrom().getFirstName()+ " " + update.getMessage().getText());
 
-        SendMessage sendMessage = new SendMessage().setChatId(update.getMessage().getChatId()); 
-        sendMessage.setText("Hello" + update.getMessage().getFrom().getFirstName() + " \n" + update.getMessage().getText());
-
         UserInput userinput = new UserInput();
-        sendMessage = userinput.handleUserInput(update);
+        ArrayList<SendMessage> sendMessageArrayList = new ArrayList<SendMessage>();
+        sendMessageArrayList = userinput.handleUserInput(update);
 
-        if (sendMessage!=null) {
+        int currIndex = 0;
+
+        while (!sendMessageArrayList.isEmpty() && currIndex<sendMessageArrayList.size()) {
+
+            SendMessage sendMessage = sendMessageArrayList.get(currIndex);
+
             if (sendMessage.getText().equals("sendSadSticker")) {
                 SendSticker sendsticker = new SendSticker();
                 sendsticker.setChatId(update.getMessage().getChatId());
@@ -73,20 +76,9 @@ public class Bot extends TelegramLongPollingBot {
                     e.printStackTrace();
                 }
             }
+            currIndex++;
         }
-        else {
-            SendSticker sendsticker = new SendSticker();
-            sendsticker.setChatId(update.getMessage().getChatId());
-            Random r = new Random();
-            int choice = r.nextInt(funnyStickerArr.size());
 
-            sendsticker.setSticker(funnyStickerArr.get(choice));
-            try {
-                sendSticker(sendsticker);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
         User user = new User(update.getMessage().getChatId());
         int index = 0;
         if (userArr.size() == 0)
