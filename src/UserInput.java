@@ -42,15 +42,31 @@ public class UserInput extends Bot{
                         "===================================\n");
                 replyList.add(sendmessage);
             }
-            if (msgtext.equals("/stop")) {
-                for (int i=0; i<userArr.size(); i++)
-                    if (userArr.get(i).equals(chat_id))
-                        userArr.get(i).setStop(true);
-                replyList.clear();
-                sendmessage = new SendMessage().setChatId(chat_id).setText("goodbye :(\n");
+            if (msgtext.equals("/news")) {
+                News news = new News();
+                try {
+                    sendmessage = new SendMessage().setChatId(chat_id).setText("Look what I found babe! This is interesting!\n");
+                    try {
+                        sendMessage(sendmessage);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+
+                    sendmessage = new SendMessage().setChatId(chat_id).setText(news.callWebAPI("newsflash", "3e22f2fcc1344975ae2b2e69379e2a6e"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 replyList.add(sendmessage);
             }
-            else {
+//            if (msgtext.equals("/stop")) {
+//                for (int i=0; i<userArr.size(); i++)
+//                    if (userArr.get(i).equals(chat_id))
+//                        userArr.get(i).setStop(true);
+//                replyList.clear();
+//                sendmessage = new SendMessage().setChatId(chat_id).setText("goodbye :(\n");
+//                replyList.add(sendmessage);
+//            }
+//            else {
                 if (msgtext.contains(" or ")) {
                     String[] strArr = msgtext.split("or");
                     Random r = new Random();
@@ -134,13 +150,13 @@ public class UserInput extends Bot{
                     sendmessage = new SendMessage().setChatId(chat_id).setText("have some fun here https://9gag.com/\n");
                     replyList.add(sendmessage);
                 }
-            }
             if (replyList.isEmpty()) {
                 sendmessage = new SendMessage().setChatId(chat_id).setText("what " + msgtext + "\n");
                 replyList.add(sendmessage);
 
             }
         }
+
         else {
             sendmessage = new SendMessage().setChatId(chat_id).setText("sendFunnySticker");
             replyList.add(sendmessage);
